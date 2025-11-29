@@ -1,0 +1,6 @@
+city,year,median_income,population,population_growth_pct,unemployment_rate
+Karlsruhe,2020,32000,308000,0.40,4.8
+Karlsruhe,2021,33000,310000,0.65,4.5
+Karlsruhe,2022,34000,313000,0.97,4.2
+Karlsruhe,2023,35200,316000,0.96,4.0
+Karlsruhe,2024,36500,320000,1.27,3.8
