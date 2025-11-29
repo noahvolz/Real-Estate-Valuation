@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>German Real Estate Investment Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>German Real Estate Investment Calculator</h1>
+      <p class="subtitle">
+        Estimate ROE, cashflow & key metrics for a rental property in Germany.
+        <br />
+        <small>Disclaimer: This is an educational tool, not tax or investment advice.</small>
+      </p>
+    </header>
+
+    <main class="app-main">
+      <!-- LEFT: INPUTS -->
+      <section class="panel panel-inputs">
+        <h2>1. Property & Financing</h2>
+
+        <button id="loadSampleBtn" type="button" class="btn-secondary">
+          Load Sample Inputs
+        </button>
+
+        <form id="calculatorForm">
+          <fieldset>
+            <legend>Property</legend>
+            <label>
+              Purchase price (€)
+              <input type="number" id="purchasePrice" value="300000" min="0" step="1000" required />
+            </label>
+            <label>
+              Purchase side costs (% of price)
+              <small>(Grunderwerbsteuer, Notar, Makler, etc.)</small>
+              <input type="number" id="purchaseCostRate" value="10" min="0" step="0.1" />
+            </label>
+            <label>
+              Annual property appreciation (%)
+              <input type="number" id="appreciationRate" value="2" min="-10" step="0.1" />
+            </label>
+            <label>
+              Selling costs (% of future price)
+              <input type="number" id="sellingCostRate" value="3" min="0" step="0.1" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Financing</legend>
+            <label>
+              Equity (€)
+              <input type="number" id="equity" value="80000" min="0" step="1000" />
+            </label>
+            <label>
+              Interest rate (p.a., %)
+              <input type="number" id="interestRate" value="3.5" min="0" step="0.1" />
+            </label>
+            <label>
+              Loan term (years)
+              <input type="number" id="loanTermYears" value="30" min="1" step="1" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Rental & Costs</legend>
+            <label>
+              Monthly rent (€)
+              <input type="number" id="monthlyRent" value="1200" min="0" step="50" />
+            </label>
+            <label>
+              Vacancy rate (% of year)
+              <input type="number" id="vacancyRate" value="5" min="0" step="0.5" />
+            </label>
+            <label>
+              Maintenance (% of rent)
+              <small>(laufende Instandhaltung)</small>
+              <input type="number" id="maintenanceRate" value="10" min="0" step="0.5" />
+            </label>
+            <label>
+              Other annual costs (€)
+              <small>(Verwaltung, Rücklagen etc.)</small>
+              <input type="number" id="otherCostsAnnual" value="0" min="0" step="100" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Taxes & Depreciation (AfA)</legend>
+            <label>
+              Marginal income tax rate (%)
+              <small>(persönlicher Steuersatz auf Mieteinnahmen)</small>
+              <input type="number" id="taxRate" value="30" min="0" max="60" step="1" />
+            </label>
+            <label>
+              Annual depreciation (AfA, % of building value)
+              <small>
+                Typical: 2% (older), 3% (newer buildings after 2023); degressive 5% possible
+                in special cases.
+              </small>
+              <input type="number" id="depreciationRate" value="3" min="0" step="0.1" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Investment Horizon</legend>
+            <label>
+              Investment duration (years)
+              <input type="number" id="investmentYears" value="15" min="1" step="1" />
+            </label>
+          </fieldset>
+
+          <button type="button" id="runSimulationBtn" class="btn-primary">
+            Run Simulation
+          </button>
+        </form>
+      </section>
+
+      <!-- MIDDLE: SOCIO-ECONOMIC DATA -->
+      <section class="panel panel-socio">
+        <h2>2. Socio-Economic Context</h2>
+
+        <p>
+          Upload a CSV or JSON file with indicators like:
+          <code>city,year,median_income,population,population_growth_pct,unemployment_rate</code>
+        </p>
+
+        <label class="file-upload">
+          <span>Choose socio-economic file (CSV or JSON)</span>
+          <input type="file" id="socioFile" accept=".csv,application/json" />
+        </label>
+
+        <div id="socioSummary" class="socio-summary">
+          <em>No socio-economic data loaded yet.</em>
+        </div>
+
+        <div class="socio-table-wrapper">
+          <table id="socioTable"></table>
+        </div>
+      </section>
+
+      <!-- RIGHT: RESULTS & CHARTS -->
+      <section class="panel panel-results">
+        <h2>3. Results & Charts</h2>
+
+        <div id="resultsSummary" class="results-summary">
+          <!-- Filled by JS -->
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h3>Annual Cashflow (after tax)</h3>
+            <canvas id="cashflowChart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>ROE over Time</h3>
+            <canvas id="roeChart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>Cost Breakdown (Year 1)</h3>
+            <canvas id="costChart"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
