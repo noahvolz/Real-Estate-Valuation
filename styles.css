@@ -1,0 +1,260 @@
+:root {
+  --bg: #f5f7fb;
+  --panel-bg: #ffffff;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --border-soft: #e5e7eb;
+  --radius-lg: 16px;
+  --shadow-soft: 0 8px 20px rgba(15, 23, 42, 0.06);
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: radial-gradient(circle at top, #e0edff 0, #f5f7fb 40%, #f5f7fb 100%);
+  color: var(--text-main);
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.9rem;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+.subtitle small {
+  display: block;
+  margin-top: 4px;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 16px;
+}
+
+.panel {
+  background: var(--panel-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.panel h2 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+
+/* Forms */
+
+form fieldset {
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 10px 12px 12px;
+  margin-bottom: 8px;
+}
+
+form legend {
+  padding: 0 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+label small {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+input[type="number"],
+input[type="text"] {
+  margin-top: 4px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+.btn-primary,
+.btn-secondary {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  transition: transform 0.05s ease, box-shadow 0.05s ease, background 0.15s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: var(--text-main);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+/* Socio data panel */
+
+.file-upload {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px dashed var(--border-soft);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.socio-summary {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+}
+
+.socio-summary strong {
+  display: block;
+}
+
+.socio-table-wrapper {
+  margin-top: 4px;
+  max-height: 200px;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+}
+
+#socioTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+#socioTable th,
+#socioTable td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+#socioTable th {
+  background-color: #f3f4f6;
+  position: sticky;
+  top: 0;
+}
+
+/* Results */
+
+.results-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.metric-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+}
+
+.metric-card h3 {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.metric-card .metric-value {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Charts */
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.chart-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.chart-card h3 {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+}
