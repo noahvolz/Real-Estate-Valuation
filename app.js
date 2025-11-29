@@ -1,5 +1,6 @@
 // app.js
-
+// app.js
+import { simulateExcelModel } from "./excelModel.js";
 let cashflowChart = null;
 let roeChart = null;
 let costChart = null;
